@@ -2,8 +2,24 @@ const express = require('express')
 const mongoose = require('mongoose');
 const app = express()
 require('dotenv').config()
-const port = process.env.PORT
 mongoose.set('strictQuery', false);
+const port = process.env.PORT
+const cors = require('cors')
+const bodyParser = require('body-parser')
+
+
+app.use(cors())
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+const projects = require('./routes/project')
+app.use('/api/projects', projects)
+
+
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
