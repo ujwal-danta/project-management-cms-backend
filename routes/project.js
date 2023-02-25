@@ -4,21 +4,38 @@ const router = express.Router()
 var multer = require('multer');
 var path = require('path')
 
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './public/uploads')
-    },
-    filename: function (req, file, cb) {
-        /*Appending extension with original name*/
-        cb(null, file.originalname)
-    }
-})
+const Project = require('../models/project')
+const upload = require('../utils/multer')
 
-var upload = multer({ storage: storage });
+// var storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, './public/uploads')
+//     },
+//     filename: function (req, file, cb) {
+//         /*Appending extension with original name*/
+//         cb(null, Date.now() + file.originalname)
+//     }
+// })
+
+// var upload = multer({ storage: storage });
 
 router.post('/', upload.single('image'), (req, res, next) => {
-    console.log(req.body, req.file);
-    res.send(req.body)
+
+    // const newBody = {
+    //     image: req.file.filename,
+    //     ...req.body
+    // }
+    // const project = new Project(newBody)
+    // project.save()
+    //     .then((data) => {
+    //         console.log('project added')
+    //         res.send(data)
+    //     })
+    //     .catch((err) => {
+    //         res.send(err)
+    //     })
+    return res.json({ picture: req.file.path });
+
 });
 
 

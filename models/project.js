@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 const { Schema } = mongoose
 
@@ -9,9 +9,12 @@ const projectSchema = new Schema({
         unique: true
     },
     image: {
-        type: Buffer
+        type: String
     },
-    tags: [Strings],
+    tags: [String],
     githubLink: String,
     siteLink: String,
 })
+
+const Project = mongoose.model('Project', projectSchema)
+module.exports = Project
