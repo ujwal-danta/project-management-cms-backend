@@ -21,6 +21,7 @@ const postProject = async (req, res, next) => {
         res.status(200).json(data)
 
     } catch (error) {
+        // console.log(error)
         const { name } = error
         res.status(500).json({
             error: {
