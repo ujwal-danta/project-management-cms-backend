@@ -49,5 +49,17 @@ const getSingleProject = async (req, res) => {
     }
 }
 
+const updateSingleProject = async (req, res) => {
+    try {
+        console.log('patch req called')
+        const id = req.params.id
+        console.log(id)
+        console.log(req.body)
+        const updatedData = await Project.findByIdAndUpdate(id, req.body)
+        return res.status(200).json(updatedData)
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-module.exports = { postProject, getAllProjects, getSingleProject }
+module.exports = { postProject, getAllProjects, getSingleProject, updateSingleProject }
