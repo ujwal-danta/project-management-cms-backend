@@ -55,7 +55,10 @@ const updateSingleProject = async (req, res) => {
         const id = req.params.id
         console.log(id)
         console.log(req.body)
-        const updatedData = await Project.findByIdAndUpdate(id, req.body)
+        const updatedData = await Project.findByIdAndUpdate(id, req.body, {
+            new: true
+        })
+        console.log("updated data - ", updatedData)
         return res.status(200).json(updatedData)
     } catch (error) {
         console.log(error)
