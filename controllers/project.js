@@ -18,7 +18,7 @@ const postProject = async (req, res, next) => {
         }
         const project = new Project(newBody)
         const data = await project.save()
-        console.log(data)
+        // console.log(data)
         res.status(200).json(data)
 
     } catch (error) {
@@ -51,18 +51,43 @@ const getSingleProject = async (req, res) => {
 
 const updateSingleProject = async (req, res) => {
     try {
-        console.log('patch req called')
+        const newBody = {
+            image: req.file.path,
+            ...req.body
+        }
+        // console.log('patch req called')
         const id = req.params.id
-        console.log(id)
-        console.log(req.body)
-        const updatedData = await Project.findByIdAndUpdate(id, req.body, {
+        // console.log(id)
+        // console.log(req.body)
+        // console.log(req.file)
+        const updatedData = await Project.findByIdAndUpdate(id, newBody, {
             new: true
         })
-        console.log("updated data - ", updatedData)
+        // console.log("updated data - ", updatedData)
         return res.status(200).json(updatedData)
     } catch (error) {
-        console.log(error)
+        const { name } = error
+        res.status(500).json({
+            error: {
+                message: name
+            }
+        })
     }
 }
 
-module.exports = { postProject, getAllProjects, getSingleProject, updateSingleProject }
+const deleteSingleProject = async(req,res) => {
+    try {
+    const id = req.params.id
+    const res = await Project.findByIdAndDelete(id)
+    return res.status(200).json(res)
+    } catch (error) {
+        const { name } = error
+        res.status(500).json({
+            error: {
+                message: name
+            }
+        })
+    }
+}
+
+module.exports = { postProject, getAllProjects, getSingleProject, updateSingleProject, deleteSingleProject }
