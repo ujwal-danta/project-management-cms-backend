@@ -17,7 +17,10 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const projects = require('./routes/project')
+const categories = require('./routes/categories')
+
 app.use('/api/projects', projects)
+app.use('/api/categories', categories)
 
 
 
