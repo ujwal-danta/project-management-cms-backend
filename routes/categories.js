@@ -7,7 +7,7 @@ const router = express.Router()
 // const upload = require('../utils/multer')
 
 // const { postProject, getAllProjects, getSingleProject, updateSingleProject, deleteSingleProject } = require('../controllers/project')
-const {postCategory}  = require('../controllers/category')
+const {postCategory,getAllCategories, getSingleCategory}  = require('../controllers/category')
 
 // router.get('/', getAllProjects)
 // router.post('/', upload.single('image'), postProject)
@@ -15,7 +15,7 @@ const {postCategory}  = require('../controllers/category')
 // router.patch('/:id',upload.single('image'),updateSingleProject)
 // router.delete('/:id',deleteSingleProject)
 
-
+router.get('/',getAllCategories)
 router.post('/addCategory',postCategory)
 
 
