@@ -51,8 +51,9 @@ const getSingleProject = async (req, res) => {
 
 const updateSingleProject = async (req, res) => {
     try {
+        const img = req.file ? req.file.path : req.body.image
         const newBody = {
-            image: req.file.path,
+            image: img,
             ...req.body
         }
         // console.log('patch req called')
@@ -66,6 +67,7 @@ const updateSingleProject = async (req, res) => {
         // console.log("updated data - ", updatedData)
         return res.status(200).json(updatedData)
     } catch (error) {
+        console.log(error)
         const { name } = error
         res.status(500).json({
             error: {
