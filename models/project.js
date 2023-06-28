@@ -13,8 +13,12 @@ const projectSchema = new Schema({
     },
     tags: [String],
     githubLink: String,
-    siteLink: String,
-})
+    siteLink: String
+},
+    {
+        timestamps: true
+    }
+)
 
 projectSchema.plugin(uniqueValidator)
 

@@ -14,7 +14,7 @@ const getAllCategories = async (req,res,next)=>{
 
 const postCategory = async (req,res,next) => {
     try {
-        console.log(req.body)
+       
         const category = new Category(req.body)
         const data = await category.save()
         res.status(200).json(data)
@@ -28,8 +28,24 @@ const postCategory = async (req,res,next) => {
     }
 }
 
+const deleteCategory = async (req,res,next)=>{
+    try {
+        const {category} = req.params
+        const data = await Category.findOneAndDelete({
+            title : category
+        })
+        res.status(200).json(data)
+        } catch (error) {
+            const { name } = error
+            res.status(500).json({
+                error: {
+                    message: name
+                }
+            })
+        }
+}
 
 
 
 
-module.exports = { postCategory,getAllCategories}
+module.exports = { postCategory,getAllCategories,deleteCategory}
