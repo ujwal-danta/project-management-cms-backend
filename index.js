@@ -28,9 +28,9 @@ app.get('/', (req, res) => {
     res.send('<h1>Hello World</h1>')
 })
 
-app.listen(process.env.PORT || 4000, () => {
-    console.log(`App running on port ${port}`)
-})
+// app.listen(process.env.PORT || 4000, () => {
+//     console.log(`App running on port ${port}`)
+// })
 
 const start = async () => {
     try {
@@ -43,3 +43,8 @@ const start = async () => {
 }
 
 start()
+.then(()=>{
+    app.listen(process.env.PORT || 4000, () => {
+        console.log(`App running on port ${port}`)
+    })  
+})
